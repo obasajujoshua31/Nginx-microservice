@@ -2,7 +2,7 @@ FROM ruby:2.6.3
 RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
 RUN mkdir /app1
 WORKDIR /app1
-COPY Gemfile /app1/Gemfile
+COPY Gemfile /app/Gemfile
 COPY Gemfile.lock /app1/Gemfile.lock
 RUN bundle install
 COPY . /app1

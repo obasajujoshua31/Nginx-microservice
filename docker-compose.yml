@@ -6,8 +6,14 @@ services:
     build:
       context: ./app1
       dockerfile: ./Dockerfile
+    command: bash -c "rm -f tmp/pids/server.pid && rails db:create && rails db:migrate && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    volumes:
+      - .:/app1
     ports:
-      - "1000:1000"
+      - "1000:3000"
+    depends_on:
+     - db
+
   app2-ms:
     container_name: app2-ms
     restart: always
@@ -16,6 +22,11 @@ services:
       dockerfile: ./Dockerfile
     ports:
       - "1001:1001"
+
+  db:
+    image: postgres
+    volumes:
+      - ./tmp/db:/var/lib/postgresql/data
 
   nginx-server:
     container_name: nginx-server
