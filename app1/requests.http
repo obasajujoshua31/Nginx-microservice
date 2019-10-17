@@ -13,3 +13,10 @@ Content-Type: application/json,charset=utf-8
   "email": "uchenna.a.i@gmail.com",
   "password": "123456"
 }
+###
+GET http://localhost:3000/auth/validate_token HTTP/1.1
+access-token: P4vxRAqf_DrJ-Mnjefv7ww
+token-type: Bearer
+client: 35KxpQXMEj4yL-SOeEKWiQ
+expiry: 1572559363
+uid: uchenna.a.i@gmail.com
