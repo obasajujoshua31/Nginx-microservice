@@ -1,0 +1,28 @@
+version: "3"
+services:
+  app1-ms:
+    container_name: app1-ms
+    restart: always
+    build:
+      context: ./app1
+      dockerfile: ./Dockerfile
+    ports:
+      - "1000:1000"
+  app2-ms:
+    container_name: app2-ms
+    restart: always
+    build:
+      context: ./app2
+      dockerfile: ./Dockerfile
+    ports:
+      - "1001:1001"
+
+  nginx-server:
+    container_name: nginx-server
+    restart: always
+    build: .
+    ports:
+      - "80:80"
+    depends_on:
+      - app1-ms
+      - app2-ms
