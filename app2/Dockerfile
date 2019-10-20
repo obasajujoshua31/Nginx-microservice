@@ -1,11 +1,18 @@
-FROM node:alpine
+FROM python:3.7.4
 
-WORKDIR /app
+WORKDIR /app2
 
-COPY package.json /app/package.json
+VOLUME [ "/app2" ]
 
-COPY . /app
+RUN ls
 
-RUN yarn install
+RUN pip install graphene-django
 
-CMD ["yarn", "start"]
+COPY . .
+
+RUN python manage.py makemigrations
+RUN python manage.py migrate
+
+COPY . .
+
+CMD ["python", "manage.py", "runserver", "0.0.0.0:9000"]
